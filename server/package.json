@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "start": "node dist/index",
     "dev": "tsc-watch -b --onSuccess \"node dist/index\""
   },
