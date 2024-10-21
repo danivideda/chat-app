@@ -3,12 +3,18 @@ import http from 'node:http';
 import { Server, Socket } from 'socket.io';
 import { SocketEvent } from '../../common/dist/SocketEvent';
 import cors from 'cors';
+import ip from 'ip'
 
 const PORT = 3000;
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+});
 
 io.on('connection', (socket: Socket) => {
   console.log(`A user connected: ${socket.id}`);
@@ -29,5 +35,5 @@ app.get('/', (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Server started on ${PORT}`);
+  console.log(`Server started on ${ip.address()}:${PORT}`);
 });

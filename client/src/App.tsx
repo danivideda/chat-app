@@ -1,40 +1,17 @@
-import { useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
-import socket from './socket';
+import { Box, ChakraProvider, Heading } from '@chakra-ui/react';
+import ChatBox from './components/ChatBox';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    socket.on('connect', () => console.log(socket.id));
-  });
-
   return (
-    <>
-      <div className="flex justify-evenly">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+    <ChakraProvider>
+      <Box p={5}>
+        <Heading as="h1" mb={6}>
+          Real-time Chat
+        </Heading>
+        <ChatBox />
+      </Box>
+    </ChakraProvider>
+  )
 }
 
 export default App;
